@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  pl-app:
+    image: johnwang412/playlist-demo:latest
+    networks:
+      - playlist-nw
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: any
+        delay: 20s
+      # todo: what is this stuff?
+      update_config:
+        parallelism: 1
+        delay: 10s
+
+networks:
+  playlist-nw:
