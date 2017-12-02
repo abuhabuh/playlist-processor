@@ -4,25 +4,19 @@ package com.fabricsounds.playlist.processor.format
   */
 
 import akka.actor.{Actor, Props}
-import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}
+import akka.routing.{RoundRobinPool}
 import com.fabricsounds.playlist.processor.PlaylistInfo
 import com.fabricsounds.playlist.processor.format.flatfile.FlatfileParser
 
 class FormatRouter extends Actor {
 
-  // Create workers for the router
-  var router = {
-    val routees = Vector.fill(5) {
-      val routee = context.actorOf(Props[FlatfileParser])
-      context watch routee
-      ActorRefRoutee(routee)
-    }
-    Router(RoundRobinRoutingLogic(), routees)
-  }
+  val flatfileParserRouter = context.actorOf(
+    Props[FlatfileParser].withRouter(RoundRobinPool(nrOfInstances = 5)),
+    name = "FlatFileParserRouter")
 
   def receive = {
     case plInfo: PlaylistInfo =>
-      router.route(plInfo, sender())
+      flatfileParserRouter.forward(plInfo)
       println("Routing Pl Info: " + plInfo)
   }
 }

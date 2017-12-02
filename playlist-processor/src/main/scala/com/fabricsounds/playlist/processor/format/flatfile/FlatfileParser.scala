@@ -12,6 +12,6 @@ class FlatfileParser extends Actor {
 
   def receive = {
     case plInfo: PlaylistInfo =>
-      println("Got file info yay: " + plInfo + " - " + self.path)
+      println("Got file info yay: " + plInfo + " - " + self.path + " - sender: " + sender())
   }
 }
