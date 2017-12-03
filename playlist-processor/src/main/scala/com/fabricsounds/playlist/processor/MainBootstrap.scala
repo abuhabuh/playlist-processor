@@ -5,8 +5,8 @@ package com.fabricsounds.playlist.processor
 
 import akka.actor.ActorSystem
 import akka.actor.Props
-
 import client.PlayListClient
+import com.typesafe.config.ConfigFactory
 
 
 object MainBootstrap {
@@ -18,7 +18,9 @@ object MainBootstrap {
     println("=== Startup ===");
 
     // todo: extract system name / add config
-    val system = ActorSystem("PlaylistProcessorSystem")
+    val configuration = ConfigFactory.load()
+    val system = ActorSystem(
+      configuration.getString("const.seed.system_name"), configuration)
 
     val clientActor = system.actorOf(Props[PlayListClient], "PlaylistClient")
   }

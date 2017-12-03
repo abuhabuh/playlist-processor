@@ -20,7 +20,7 @@ lazy val root = (project in file(".")).
       "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
       "com.typesafe.akka" %% "akka-cluster-metrics" % akkaVersion,
       "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
-      "com.typesafe.akka" %% "akka-multi-node-testkit" % akkaVersion,
+      "com.typesafe.akka" %% "akka-multi-node-testkit" % akkaVersion
     ),
     libraryDependencies ++= Seq(
       "org.scalaj" %% "scalaj-http" % "2.3.0"
