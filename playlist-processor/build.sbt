@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
       packageName := "playlist-demo",
       organization := "com.fabricsounds",
       scalaVersion := "2.12.3",
-      version      := "0.0.1"
+      version      := "0.0.2"
     )),
 
     libraryDependencies += scalaTest % Test,
