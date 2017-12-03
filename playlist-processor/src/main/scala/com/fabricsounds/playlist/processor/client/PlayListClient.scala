@@ -16,15 +16,16 @@ import com.fabricsounds.playlist.processor.format.FormatRouter
 
 class PlayListClient extends Actor {
 
-  // todo: dunno why i need this
+  // todo: dunno why i need context.dispatcher imported
   import context.dispatcher
+
   val tickTask = context.system.scheduler.schedule(2.seconds, 2.seconds, self, Tick)
 
   val formatRouter = context.actorOf(Props[FormatRouter])
 
   def receive = {
     case Tick =>
-      println("TICK!!!!!!!")
+      println("CLIENT [" + self.path + "] -- tick")
       formatRouter ! PlaylistInfo("hello")
   }
 

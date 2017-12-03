@@ -13,7 +13,7 @@ class FlatfileParser extends Actor {
 
   def receive = {
     case plInfo: PlaylistInfo =>
-      println("Got file info yay: " + plInfo + " - " + self.path + " - sender: " + sender())
+      println("PARSER [" + self.path + "] -- Got file info yay: sender: " + sender())
       val request: HttpRequest = Http("http://date.jsontest.com/")
 
       println(request.asString)

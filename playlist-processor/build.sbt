@@ -7,7 +7,6 @@ lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
       name := "PlaylistProcessor",
-      packageName := "playlist-demo",
       organization := "com.fabricsounds",
       scalaVersion := "2.12.3",
       version      := "0.0.2"
@@ -27,6 +26,7 @@ lazy val root = (project in file(".")).
     )
   ).enablePlugins(JavaAppPackaging)
 
+packageName := "playlist-demo"
 dockerRepository := Some("johnwang412")
 dockerBaseImage := "anapsix/alpine-java:latest"
 dockerUpdateLatest := true

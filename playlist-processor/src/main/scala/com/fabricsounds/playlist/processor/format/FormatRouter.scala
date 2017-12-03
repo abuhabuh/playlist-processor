@@ -16,7 +16,7 @@ class FormatRouter extends Actor {
 
   def receive = {
     case plInfo: PlaylistInfo =>
+      println("ROUTER " + self.path + "] -- Routing Pl Info")
       flatfileParserRouter.forward(plInfo)
-      println("Routing Pl Info: " + plInfo)
   }
 }

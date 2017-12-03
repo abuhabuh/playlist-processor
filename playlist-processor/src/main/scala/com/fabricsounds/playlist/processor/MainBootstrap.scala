@@ -17,10 +17,9 @@ object MainBootstrap {
   def startup(): Unit = {
     println("=== Startup ===");
 
-    // todo: extract system name / add config
     val configuration = ConfigFactory.load()
     val system = ActorSystem(
-      configuration.getString("const.seed.system_name"), configuration)
+      configuration.getString("const.system_name"), configuration)
 
     val clientActor = system.actorOf(Props[PlayListClient], "PlaylistClient")
   }
