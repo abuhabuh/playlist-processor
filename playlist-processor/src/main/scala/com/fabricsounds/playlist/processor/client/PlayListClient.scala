@@ -11,17 +11,18 @@ import com.fabricsounds.playlist.processor.{PlaylistInfo, Tick}
 
 import scala.concurrent.duration._
 import akka.actor.{Actor, Props}
-import com.fabricsounds.playlist.processor.format.FormatRouter
+import akka.routing.FromConfig
+import com.fabricsounds.playlist.processor.format.flatfile.FlatfileParser
 
 
-class PlayListClient extends Actor {
+class PlaylistClient extends Actor {
 
   // todo: dunno why i need context.dispatcher imported
   import context.dispatcher
 
   val tickTask = context.system.scheduler.schedule(2.seconds, 2.seconds, self, Tick)
 
-  val formatRouter = context.actorOf(Props[FormatRouter])
+  val formatRouter = context.actorOf(FromConfig.props(Props[FlatfileParser]), "FormatRouter")
 
   def receive = {
     case Tick =>
